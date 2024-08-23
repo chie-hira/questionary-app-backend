@@ -1,5 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { AnswerFormat } from '../enums/questionnaire.enum';
+import { ChoiceModel } from 'src/choice/models/choice.model';
 
 @ObjectType()
 export class QuestionnaireModel {
@@ -17,6 +18,9 @@ export class QuestionnaireModel {
 
   @Field()
   updatedAt: Date;
+
+  @Field(() => [ChoiceModel])
+  choices: ChoiceModel[];
 
   // @Field(() => UserModel)
   // user: UserModel;

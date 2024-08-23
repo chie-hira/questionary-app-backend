@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { QuestionnaireModule } from './questionnaire/questionnaire.module';
+import { ChoiceModule } from './choice/choice.module';
 
 @Module({
   imports: [
@@ -19,11 +20,10 @@ import { QuestionnaireModule } from './questionnaire/questionnaire.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
       entities: [__dirname + '/**/*.entity{.ts,.js}'], // エンティティのパス
-      synchronize: false,
+      synchronize: true,
       /**
        * true: アプリケーションを再起動するたびにエンティティを同期
-       * エンティティ名を修正したとき、古いエンティティ名のテーブルがそのまま残るため
-       * falseにしてmigrateを使う
+       * エンティティ名を修正したとき、古いエンティティ名のテーブルがそのまま残る
        */
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -32,6 +32,7 @@ import { QuestionnaireModule } from './questionnaire/questionnaire.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     QuestionnaireModule,
+    ChoiceModule,
   ],
 })
 export class AppModule {}
