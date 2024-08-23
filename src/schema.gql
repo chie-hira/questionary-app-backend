@@ -18,3 +18,12 @@ scalar DateTime
 type Query {
   getAllQuestionnaires: [QuestionnaireModel!]!
 }
+
+type Mutation {
+  createQuestionnaire(createQuestionnaireInput: CreateQuestionnaireInput!): QuestionnaireModel!
+}
+
+input CreateQuestionnaireInput {
+  title: String!
+  answerFormat: String!
+}

@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { QuestionnaireModel } from './models/questionnaire.model';
 import { Questionnaire } from './entities/questionnaire.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateQuestionnaireInput } from './dto/createQuestionnaire.Input.dto';
 
 @Injectable()
 export class QuestionnaireService {
@@ -14,11 +15,20 @@ export class QuestionnaireService {
 
   async getAllQuestionnaires(): Promise<QuestionnaireModel[]> {
     return await this.questionnaireRepository.find();
-    // const questionnaire = new QuestionnaireModel();
-    // questionnaire.id = 1;
-    // questionnaire.title = 'What is your favorite programming language?';
-    // questionnaire.answerFormat = AnswerFormat.ONE_CHOICE;
-    // this.questionnaires.push(questionnaire);
-    // return this.questionnaires;
+  }
+
+  async createQuestionnaire(
+    createQuestionnaireInput: CreateQuestionnaireInput,
+  ): Promise<QuestionnaireModel> {
+    const { title, answerFormat } = createQuestionnaireInput;
+    // const user = await this.userRepository.findOne({ where: { id: userId } });
+
+    const newQuestionnaire = this.questionnaireRepository.create({
+      title,
+      answerFormat,
+      // user,
+    });
+
+    return await this.questionnaireRepository.save(newQuestionnaire);
   }
 }
