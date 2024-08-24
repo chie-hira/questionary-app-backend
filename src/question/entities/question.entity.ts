@@ -15,7 +15,7 @@ export class Question {
   id: number;
 
   @Column()
-  title: string;
+  question: string;
 
   @Column({ default: AnswerFormat.ONE_CHOICE })
   answerFormat: AnswerFormat;

@@ -9,7 +9,7 @@ export class QuestionModel {
   id: number;
 
   @Field()
-  title: string;
+  question: string;
 
   @Field()
   answerFormat: AnswerFormat;

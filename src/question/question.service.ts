@@ -27,11 +27,11 @@ export class QuestionService {
   async createQuestion(
     createQuestionInput: CreateQuestionInput,
   ): Promise<QuestionModel> {
-    const { title, answerFormat, userId } = createQuestionInput;
+    const { question, answerFormat, userId } = createQuestionInput;
     const user = await this.userRepository.findOne({ where: { id: userId } });
 
     const newQuestion = this.questionRepository.create({
-      title,
+      question,
       answerFormat,
       user,
     });
@@ -43,11 +43,11 @@ export class QuestionService {
     createQuestionInput: CreateQuestionInput,
     createAnswerChoicesInput: CreateAnswerChoiceInput[],
   ): Promise<QuestionModel> {
-    const { title, answerFormat, userId } = createQuestionInput;
+    const { question, answerFormat, userId } = createQuestionInput;
     const user = await this.userRepository.findOne({ where: { id: userId } });
 
     const newQuestion = this.questionRepository.create({
-      title,
+      question,
       answerFormat,
       user,
     });

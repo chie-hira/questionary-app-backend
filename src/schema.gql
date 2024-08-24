@@ -26,7 +26,7 @@ type UserModel {
 
 type QuestionModel {
   id: Int!
-  title: String!
+  question: String!
   answerFormat: String!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -45,7 +45,7 @@ type Mutation {
 }
 
 input CreateQuestionInput {
-  title: String!
+  question: String!
   answerFormat: String!
   userId: Int!
 }

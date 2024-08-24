@@ -6,7 +6,7 @@ import { IsNotEmpty } from 'class-validator';
 export class CreateQuestionInput {
   @Field()
   @IsNotEmpty()
-  title: string;
+  question: string;
 
   @Field()
   @IsNotEmpty()
