@@ -3,9 +3,9 @@ import { Repository } from 'typeorm';
 import { QuestionModel } from './models/question.model';
 import { Question } from './entities/question.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateQuestionInput } from './dto/createQuestion.Input.dto';
+import { CreateQuestionInput } from './dto/createQuestion.input.dto';
 import { AnswerChoice } from '../answerChoice/entities/answerChoice.entity';
-import { CreateAnswerChoiceInput } from '../answerChoice/dto/createAnswerChoice.Input.dto';
+import { CreateAnswerChoiceInput } from '../answerChoice/dto/createAnswerChoice.input.dto';
 import { User } from 'src/user/entities/user.entity';
 
 @Injectable()

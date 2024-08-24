@@ -1,7 +1,7 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { UserModel } from './models/user.model';
-import { CreateUserInput } from './dto/createUser.Input.dto';
+import { CreateUserInput } from './dto/createUser.input.dto';
 import { GetUserArgs } from './dto/getUser.input.dto';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
