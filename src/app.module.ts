@@ -4,8 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
-import { QuestionnaireModule } from './question/question.module';
-import { ChoiceModule } from './answerChoice/answerChoice.module';
+import { AuthModule } from './auth/auth.module';
+import { QuestionModule } from './question/question.module';
 
 @Module({
   imports: [
@@ -32,8 +32,9 @@ import { ChoiceModule } from './answerChoice/answerChoice.module';
       playground: true,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
-    QuestionnaireModule,
-    ChoiceModule,
+    // アプリケーション全体でQuery,Mutationを使用する場合、Moduleをインポート
+    QuestionModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

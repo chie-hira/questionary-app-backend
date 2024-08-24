@@ -7,7 +7,7 @@ type AnswerChoiceModel {
   choice: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-  questionnaire: QuestionModel!
+  question: QuestionModel!
 }
 
 """
@@ -17,28 +17,61 @@ scalar DateTime
 
 type QuestionModel {
   id: Int!
-  title: String!
+  question: String!
   answerFormat: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   choices: [AnswerChoiceModel!]!
+  user: UserModel!
+}
+
+type UserModel {
+  id: Int!
+  name: String!
+  email: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  questions: [QuestionModel!]
+}
+
+type LoginResponse {
+  accessToken: String!
+  user: UserModel!
 }
 
 type Query {
   getAllQuestions: [QuestionModel!]!
+  findOneByEmail(getUserArgs: GetUserArgs!): UserModel
+}
+
+input GetUserArgs {
+  email: String!
 }
 
 type Mutation {
-  createQuestion(createQuestionnaireInput: CreateQuestionInput!): QuestionModel!
   createQuestionWithAnswerChoices(createQuestionInput: CreateQuestionInput!, createAnswerChoicesInput: [CreateAnswerChoiceInput!]!): QuestionModel!
+  login(loginInput: LoginInput!): LoginResponse!
+  createUser(createUserInput: CreateUserInput!): UserModel!
 }
 
 input CreateQuestionInput {
-  title: String!
+  question: String!
   answerFormat: String!
+  userId: Int!
 }
 
 input CreateAnswerChoiceInput {
   choice: String!
   questionId: Int!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
 }

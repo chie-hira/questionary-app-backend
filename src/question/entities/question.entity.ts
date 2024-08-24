@@ -1,6 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  ManyToOne,
+} from 'typeorm';
 import { AnswerFormat } from '../enums/question.enum';
 import { AnswerChoice } from '../../answerChoice/entities/answerChoice.entity';
+import { User } from 'src/user/entities/user.entity';
 
 @Entity('questions')
 export class Question {
@@ -8,7 +15,7 @@ export class Question {
   id: number;
 
   @Column()
-  title: string;
+  question: string;
 
   @Column({ default: AnswerFormat.ONE_CHOICE })
   answerFormat: AnswerFormat;
@@ -25,4 +32,7 @@ export class Question {
 
   @OneToMany(() => AnswerChoice, (choice) => choice.question)
   choices: AnswerChoice[];
+
+  @ManyToOne(() => User, (user) => user.questions)
+  user: User;
 }

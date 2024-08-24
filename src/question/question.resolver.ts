@@ -3,27 +3,21 @@ import { QuestionService } from './question.service';
 import { QuestionModel } from './models/question.model';
 import { CreateQuestionInput } from './dto/createQuestion.Input.dto';
 import { CreateAnswerChoiceInput } from '../answerChoice/dto/createAnswerChoice.Input.dto';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Resolver()
 export class QuestionResolver {
-  constructor(private readonly questionnaireService: QuestionService) {}
+  constructor(private readonly questionService: QuestionService) {}
 
   @Query(() => [QuestionModel])
+  @UseGuards(JwtAuthGuard)
   async getAllQuestions(): Promise<QuestionModel[]> {
-    return this.questionnaireService.getAllQuestions();
+    return this.questionService.getAllQuestions();
   }
 
   @Mutation(() => QuestionModel)
-  async createQuestion(
-    @Args('createQuestionnaireInput')
-    createQuestionnaireInput: CreateQuestionInput,
-  ): Promise<QuestionModel> {
-    return await this.questionnaireService.createQuestion(
-      createQuestionnaireInput,
-    );
-  }
-
-  @Mutation(() => QuestionModel)
+  @UseGuards(JwtAuthGuard)
   async createQuestionWithAnswerChoices(
     @Args('createQuestionInput')
     createQuestionInput: CreateQuestionInput,
@@ -33,7 +27,7 @@ export class QuestionResolver {
     })
     createAnswerChoicesInput: CreateAnswerChoiceInput[],
   ): Promise<QuestionModel> {
-    return this.questionnaireService.createQuestionWithAnswerChoices(
+    return this.questionService.createQuestionWithAnswerChoices(
       createQuestionInput,
       createAnswerChoicesInput,
     );

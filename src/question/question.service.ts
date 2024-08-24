@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateQuestionInput } from './dto/createQuestion.Input.dto';
 import { AnswerChoice } from '../answerChoice/entities/answerChoice.entity';
 import { CreateAnswerChoiceInput } from '../answerChoice/dto/createAnswerChoice.Input.dto';
+import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class QuestionService {
@@ -14,39 +15,25 @@ export class QuestionService {
     private readonly questionRepository: Repository<QuestionModel>,
     @InjectRepository(AnswerChoice)
     private readonly choiceRepository: Repository<AnswerChoice>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
-  questionnaires: QuestionModel[] = [];
 
   async getAllQuestions(): Promise<QuestionModel[]> {
     return await this.questionRepository.find();
-  }
-
-  async createQuestion(
-    createQuestionInput: CreateQuestionInput,
-  ): Promise<QuestionModel> {
-    const { title, answerFormat } = createQuestionInput;
-    // const user = await this.userRepository.findOne({ where: { id: userId } });
-
-    const newQuestion = this.questionRepository.create({
-      title,
-      answerFormat,
-      // user,
-    });
-
-    return await this.questionRepository.save(newQuestion);
   }
 
   async createQuestionWithAnswerChoices(
     createQuestionInput: CreateQuestionInput,
     createAnswerChoicesInput: CreateAnswerChoiceInput[],
   ): Promise<QuestionModel> {
-    const { title, answerFormat } = createQuestionInput;
-    // const user = await this.userRepository.findOne({ where: { id: userId } });
+    const { question, answerFormat, userId } = createQuestionInput;
+    const user = await this.userRepository.findOne({ where: { id: userId } });
 
     const newQuestion = this.questionRepository.create({
-      title,
+      question,
       answerFormat,
-      // user,
+      user,
     });
 
     await this.questionRepository.save(newQuestion);
@@ -60,11 +47,11 @@ export class QuestionService {
 
     await this.choiceRepository.save(newChoices);
 
-    const savedQuestionnaire = await this.questionRepository.findOne({
+    const savedQuestion = await this.questionRepository.findOne({
       where: { id: newQuestion.id },
       relations: ['choices'], // choicesリレーションをロード
     });
 
-    return savedQuestionnaire as QuestionModel;
+    return savedQuestion as QuestionModel;
   }
 }
