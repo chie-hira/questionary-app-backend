@@ -23,6 +23,15 @@ export class QuestionService {
     return await this.questionRepository.find();
   }
 
+  async getQuestionsByUser(userId: number): Promise<QuestionModel[]> {
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+
+    return await this.questionRepository.find({
+      relations: ['user', 'choices'],
+      where: { user },
+    });
+  }
+
   async createQuestionWithAnswerChoices(
     createQuestionInput: CreateQuestionInput,
     createAnswerChoicesInput: CreateAnswerChoiceInput[],
@@ -49,7 +58,7 @@ export class QuestionService {
 
     const savedQuestion = await this.questionRepository.findOne({
       where: { id: newQuestion.id },
-      relations: ['choices'], // choicesリレーションをロード
+      relations: ['user', 'choices'], // choicesリレーションをロード
     });
 
     return savedQuestion as QuestionModel;

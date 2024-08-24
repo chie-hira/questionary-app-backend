@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { QuestionService } from './question.service';
 import { QuestionModel } from './models/question.model';
 import { CreateQuestionInput } from './dto/createQuestion.Input.dto';
@@ -14,6 +14,14 @@ export class QuestionResolver {
   @UseGuards(JwtAuthGuard)
   async getAllQuestions(): Promise<QuestionModel[]> {
     return this.questionService.getAllQuestions();
+  }
+
+  @Query(() => [QuestionModel])
+  @UseGuards(JwtAuthGuard)
+  async getQuestionsByUser(
+    @Args('userId', { type: () => Int }) userId: number,
+  ): Promise<QuestionModel[]> {
+    return this.questionService.getQuestionsByUser(userId);
   }
 
   @Mutation(() => QuestionModel)
