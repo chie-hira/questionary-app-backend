@@ -18,7 +18,6 @@ export class QuestionService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {}
-  questionnaires: QuestionModel[] = [];
 
   async getAllQuestions(): Promise<QuestionModel[]> {
     return await this.questionRepository.find();
@@ -48,11 +47,11 @@ export class QuestionService {
 
     await this.choiceRepository.save(newChoices);
 
-    const savedQuestionnaire = await this.questionRepository.findOne({
+    const savedQuestion = await this.questionRepository.findOne({
       where: { id: newQuestion.id },
       relations: ['choices'], // choicesリレーションをロード
     });
 
-    return savedQuestionnaire as QuestionModel;
+    return savedQuestion as QuestionModel;
   }
 }

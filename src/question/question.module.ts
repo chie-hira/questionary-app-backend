@@ -14,4 +14,4 @@ import { User } from 'src/user/entities/user.entity';
   ],
   providers: [QuestionResolver, QuestionService],
 })
-export class QuestionnaireModule {}
+export class QuestionModule {}

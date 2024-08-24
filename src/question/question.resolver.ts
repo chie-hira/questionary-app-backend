@@ -8,12 +8,12 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Resolver()
 export class QuestionResolver {
-  constructor(private readonly questionnaireService: QuestionService) {}
+  constructor(private readonly questionService: QuestionService) {}
 
-  @UseGuards(JwtAuthGuard)
   @Query(() => [QuestionModel])
+  @UseGuards(JwtAuthGuard)
   async getAllQuestions(): Promise<QuestionModel[]> {
-    return this.questionnaireService.getAllQuestions();
+    return this.questionService.getAllQuestions();
   }
 
   @Mutation(() => QuestionModel)
@@ -27,7 +27,7 @@ export class QuestionResolver {
     })
     createAnswerChoicesInput: CreateAnswerChoiceInput[],
   ): Promise<QuestionModel> {
-    return this.questionnaireService.createQuestionWithAnswerChoices(
+    return this.questionService.createQuestionWithAnswerChoices(
       createQuestionInput,
       createAnswerChoicesInput,
     );
