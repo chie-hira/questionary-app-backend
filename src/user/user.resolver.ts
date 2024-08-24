@@ -3,12 +3,15 @@ import { UserService } from './user.service';
 import { UserModel } from './models/user.model';
 import { CreateUserInput } from './dto/createUser.Input.dto';
 import { GetUserArgs } from './dto/getUser.input.dto';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Resolver()
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Query(() => UserModel, { nullable: true })
+  @UseGuards(JwtAuthGuard) // 認証状態でないとアクセスできない
   async findOneByEmail(
     @Args('getUserArgs') getUserArgs: GetUserArgs,
   ): Promise<UserModel> {

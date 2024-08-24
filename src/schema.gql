@@ -49,7 +49,6 @@ input GetUserArgs {
 }
 
 type Mutation {
-  createQuestion(createQuestionnaireInput: CreateQuestionInput!): QuestionModel!
   createQuestionWithAnswerChoices(createQuestionInput: CreateQuestionInput!, createAnswerChoicesInput: [CreateAnswerChoiceInput!]!): QuestionModel!
   createUser(createUserInput: CreateUserInput!): UserModel!
   login(loginInput: LoginInput!): LoginResponse!

@@ -24,21 +24,6 @@ export class QuestionService {
     return await this.questionRepository.find();
   }
 
-  async createQuestion(
-    createQuestionInput: CreateQuestionInput,
-  ): Promise<QuestionModel> {
-    const { question, answerFormat, userId } = createQuestionInput;
-    const user = await this.userRepository.findOne({ where: { id: userId } });
-
-    const newQuestion = this.questionRepository.create({
-      question,
-      answerFormat,
-      user,
-    });
-
-    return await this.questionRepository.save(newQuestion);
-  }
-
   async createQuestionWithAnswerChoices(
     createQuestionInput: CreateQuestionInput,
     createAnswerChoicesInput: CreateAnswerChoiceInput[],
