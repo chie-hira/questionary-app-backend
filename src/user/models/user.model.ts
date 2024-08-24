@@ -1,4 +1,5 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, HideField, Int, ObjectType } from '@nestjs/graphql';
+import { QuestionModel } from 'src/question/models/question.model';
 
 @ObjectType()
 export class UserModel {
@@ -11,7 +12,7 @@ export class UserModel {
   @Field()
   email: string;
 
-  @Field()
+  @HideField()
   password: string;
 
   @Field()
@@ -19,4 +20,7 @@ export class UserModel {
 
   @Field()
   updatedAt: Date;
+
+  @Field(() => [QuestionModel], { nullable: true })
+  questions: QuestionModel[];
 }

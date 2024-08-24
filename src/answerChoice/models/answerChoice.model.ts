@@ -16,5 +16,5 @@ export class AnswerChoiceModel {
   updatedAt: Date;
 
   @Field(() => QuestionModel)
-  questionnaire: QuestionModel;
+  question: QuestionModel;
 }

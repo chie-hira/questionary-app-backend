@@ -7,7 +7,7 @@ type AnswerChoiceModel {
   choice: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-  questionnaire: QuestionModel!
+  question: QuestionModel!
 }
 
 """
@@ -19,9 +19,9 @@ type UserModel {
   id: Int!
   name: String!
   email: String!
-  password: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  questions: [QuestionModel!]
 }
 
 type QuestionModel {
@@ -34,14 +34,25 @@ type QuestionModel {
   user: UserModel!
 }
 
+type LoginResponse {
+  accessToken: String!
+  user: UserModel!
+}
+
 type Query {
   getAllQuestions: [QuestionModel!]!
+  findOneByEmail(getUserArgs: GetUserArgs!): UserModel
+}
+
+input GetUserArgs {
+  email: String!
 }
 
 type Mutation {
   createQuestion(createQuestionnaireInput: CreateQuestionInput!): QuestionModel!
   createQuestionWithAnswerChoices(createQuestionInput: CreateQuestionInput!, createAnswerChoicesInput: [CreateAnswerChoiceInput!]!): QuestionModel!
   createUser(createUserInput: CreateUserInput!): UserModel!
+  login(loginInput: LoginInput!): LoginResponse!
 }
 
 input CreateQuestionInput {
@@ -57,6 +68,11 @@ input CreateAnswerChoiceInput {
 
 input CreateUserInput {
   name: String!
+  email: String!
+  password: String!
+}
+
+input LoginInput {
   email: String!
   password: String!
 }

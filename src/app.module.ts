@@ -7,6 +7,7 @@ import { join } from 'path';
 import { QuestionnaireModule } from './question/question.module';
 import { ChoiceModule } from './answerChoice/answerChoice.module';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { UserModule } from './user/user.module';
     QuestionnaireModule,
     ChoiceModule,
     UserModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
