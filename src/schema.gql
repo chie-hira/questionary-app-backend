@@ -24,6 +24,15 @@ type QuestionModel {
   choices: [AnswerChoiceModel!]!
 }
 
+type UserModel {
+  id: Int!
+  name: String!
+  email: String!
+  password: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
   getAllQuestions: [QuestionModel!]!
 }
@@ -31,14 +40,22 @@ type Query {
 type Mutation {
   createQuestion(createQuestionnaireInput: CreateQuestionInput!): QuestionModel!
   createQuestionWithAnswerChoices(createQuestionInput: CreateQuestionInput!, createAnswerChoicesInput: [CreateAnswerChoiceInput!]!): QuestionModel!
+  createUser(createUserInput: CreateUserInput!): UserModel!
 }
 
 input CreateQuestionInput {
   title: String!
   answerFormat: String!
+  userId: Int!
 }
 
 input CreateAnswerChoiceInput {
   choice: String!
   questionId: Int!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
 }

@@ -1,4 +1,4 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, Int } from '@nestjs/graphql';
 import { AnswerFormat } from '../enums/question.enum';
 
 @InputType()
@@ -9,6 +9,6 @@ export class CreateQuestionInput {
   @Field()
   answerFormat: AnswerFormat;
 
-  // @Field(() => Int)
-  // userId: number;
+  @Field(() => Int)
+  userId: number;
 }
