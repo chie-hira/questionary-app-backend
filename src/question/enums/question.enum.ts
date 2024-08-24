@@ -1,0 +1,5 @@
+export enum AnswerFormat {
+  ONE_CHOICE = 'ONE_CHOICE',
+  MULTIPLE_CHOICE = 'MULTIPLE_CHOICE',
+  DESCRIPTION = 'DESCRIPTION',
+}

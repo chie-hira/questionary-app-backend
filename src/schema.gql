@@ -1,0 +1,44 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AnswerChoiceModel {
+  id: Int!
+  choice: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  questionnaire: QuestionModel!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type QuestionModel {
+  id: Int!
+  title: String!
+  answerFormat: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  choices: [AnswerChoiceModel!]!
+}
+
+type Query {
+  getAllQuestions: [QuestionModel!]!
+}
+
+type Mutation {
+  createQuestion(createQuestionnaireInput: CreateQuestionInput!): QuestionModel!
+  createQuestionWithAnswerChoices(createQuestionInput: CreateQuestionInput!, createAnswerChoicesInput: [CreateAnswerChoiceInput!]!): QuestionModel!
+}
+
+input CreateQuestionInput {
+  title: String!
+  answerFormat: String!
+}
+
+input CreateAnswerChoiceInput {
+  choice: String!
+  questionId: Int!
+}
