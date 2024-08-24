@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateQuestionInput } from './dto/createQuestion.Input.dto';
 import { AnswerChoice } from '../answerChoice/entities/answerChoice.entity';
 import { CreateAnswerChoiceInput } from '../answerChoice/dto/createAnswerChoice.Input.dto';
+import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class QuestionService {
@@ -14,6 +15,8 @@ export class QuestionService {
     private readonly questionRepository: Repository<QuestionModel>,
     @InjectRepository(AnswerChoice)
     private readonly choiceRepository: Repository<AnswerChoice>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
   questionnaires: QuestionModel[] = [];
 
@@ -24,13 +27,13 @@ export class QuestionService {
   async createQuestion(
     createQuestionInput: CreateQuestionInput,
   ): Promise<QuestionModel> {
-    const { title, answerFormat } = createQuestionInput;
-    // const user = await this.userRepository.findOne({ where: { id: userId } });
+    const { title, answerFormat, userId } = createQuestionInput;
+    const user = await this.userRepository.findOne({ where: { id: userId } });
 
     const newQuestion = this.questionRepository.create({
       title,
       answerFormat,
-      // user,
+      user,
     });
 
     return await this.questionRepository.save(newQuestion);
@@ -40,13 +43,13 @@ export class QuestionService {
     createQuestionInput: CreateQuestionInput,
     createAnswerChoicesInput: CreateAnswerChoiceInput[],
   ): Promise<QuestionModel> {
-    const { title, answerFormat } = createQuestionInput;
-    // const user = await this.userRepository.findOne({ where: { id: userId } });
+    const { title, answerFormat, userId } = createQuestionInput;
+    const user = await this.userRepository.findOne({ where: { id: userId } });
 
     const newQuestion = this.questionRepository.create({
       title,
       answerFormat,
-      // user,
+      user,
     });
 
     await this.questionRepository.save(newQuestion);
