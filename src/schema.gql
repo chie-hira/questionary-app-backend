@@ -2,12 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type ChoiceModel {
+type AnswerChoiceModel {
   id: Int!
   choice: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-  questionnaire: QuestionnaireModel!
+  questionnaire: QuestionModel!
 }
 
 """
@@ -15,30 +15,30 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type QuestionnaireModel {
+type QuestionModel {
   id: Int!
   title: String!
   answerFormat: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-  choices: [ChoiceModel!]!
+  choices: [AnswerChoiceModel!]!
 }
 
 type Query {
-  getAllQuestionnaires: [QuestionnaireModel!]!
+  getAllQuestions: [QuestionModel!]!
 }
 
 type Mutation {
-  createQuestionnaire(createQuestionnaireInput: CreateQuestionnaireInput!): QuestionnaireModel!
-  createQuestionnaireWithChoices(createQuestionnaireInput: CreateQuestionnaireInput!, createChoicesInput: [CreateChoiceInput!]!): QuestionnaireModel!
+  createQuestion(createQuestionnaireInput: CreateQuestionInput!): QuestionModel!
+  createQuestionWithAnswerChoices(createQuestionInput: CreateQuestionInput!, createAnswerChoicesInput: [CreateAnswerChoiceInput!]!): QuestionModel!
 }
 
-input CreateQuestionnaireInput {
+input CreateQuestionInput {
   title: String!
   answerFormat: String!
 }
 
-input CreateChoiceInput {
+input CreateAnswerChoiceInput {
   choice: String!
-  questionnaireId: Int!
+  questionId: Int!
 }

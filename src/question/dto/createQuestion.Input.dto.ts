@@ -1,8 +1,8 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { AnswerFormat } from '../enums/questionnaire.enum';
+import { AnswerFormat } from '../enums/question.enum';
 
 @InputType()
-export class CreateQuestionnaireInput {
+export class CreateQuestionInput {
   @Field()
   title: string;
 

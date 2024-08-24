@@ -1,8 +1,8 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { QuestionnaireModel } from 'src/questionnaire/models/questionnaire.model';
+import { QuestionModel } from '../../question/models/question.model';
 
 @ObjectType()
-export class ChoiceModel {
+export class AnswerChoiceModel {
   @Field(() => Int)
   id: number;
 
@@ -15,6 +15,6 @@ export class ChoiceModel {
   @Field()
   updatedAt: Date;
 
-  @Field(() => QuestionnaireModel)
-  questionnaire: QuestionnaireModel;
+  @Field(() => QuestionModel)
+  questionnaire: QuestionModel;
 }

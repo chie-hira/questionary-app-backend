@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { AnswerFormat } from '../enums/questionnaire.enum';
-import { Choice } from '../../choice/entities/choice.entity';
+import { AnswerFormat } from '../enums/question.enum';
+import { AnswerChoice } from '../../answerChoice/entities/answerChoice.entity';
 
-@Entity('questionnaires')
-export class Questionnaire {
+@Entity('questions')
+export class Question {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -23,6 +23,6 @@ export class Questionnaire {
   })
   updatedAt: Date;
 
-  @OneToMany(() => Choice, (choice) => choice.questionnaire)
-  choices: Choice[];
+  @OneToMany(() => AnswerChoice, (choice) => choice.question)
+  choices: AnswerChoice[];
 }

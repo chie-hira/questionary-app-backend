@@ -1,4 +1,4 @@
-import { Questionnaire } from '../../questionnaire/entities/questionnaire.entity';
+import { Question } from '../../question/entities/question.entity';
 import {
   Column,
   Entity,
@@ -7,9 +7,9 @@ import {
   Unique,
 } from 'typeorm';
 
-@Entity('choices')
-@Unique(['choice', 'questionnaire'])
-export class Choice {
+@Entity('answer_choices')
+@Unique(['choice', 'question'])
+export class AnswerChoice {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -26,9 +26,9 @@ export class Choice {
   })
   updatedAt: Date;
 
-  @ManyToOne(() => Questionnaire, (questionnaire) => questionnaire.choices, {
+  @ManyToOne(() => Question, (question) => question.choices, {
     onDelete: 'CASCADE',
     nullable: false,
   })
-  questionnaire: Questionnaire;
+  question: Question;
 }

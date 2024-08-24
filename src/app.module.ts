@@ -4,8 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
-import { QuestionnaireModule } from './questionnaire/questionnaire.module';
-import { ChoiceModule } from './choice/choice.module';
+import { QuestionnaireModule } from './question/question.module';
+import { ChoiceModule } from './answerChoice/answerChoice.module';
 
 @Module({
   imports: [
@@ -24,6 +24,7 @@ import { ChoiceModule } from './choice/choice.module';
       /**
        * true: アプリケーションを再起動するたびにエンティティを同期
        * エンティティ名を修正したとき、古いエンティティ名のテーブルがそのまま残る
+       * 主導でmigrationを作成する場合はfalseにする
        */
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
