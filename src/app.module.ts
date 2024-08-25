@@ -6,6 +6,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { QuestionModule } from './question/question.module';
+import { RespondentModule } from './respondent/respondent.module';
+import { AnswerModule } from './answer/answer.module';
 
 @Module({
   imports: [
@@ -35,6 +37,8 @@ import { QuestionModule } from './question/question.module';
     // アプリケーション全体でQuery,Mutationを使用する場合、Moduleをインポート
     QuestionModule,
     AuthModule,
+    RespondentModule,
+    AnswerModule,
   ],
 })
 export class AppModule {}

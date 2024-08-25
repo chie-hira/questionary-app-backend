@@ -1,8 +1,8 @@
-import { Question } from 'src/question/entities/question.entity';
+import { Answer } from 'src/answer/entities/answer.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('users')
-export class User {
+@Entity('respondents')
+export class Respondent {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -11,9 +11,6 @@ export class User {
 
   @Column({ unique: true })
   email: string;
-
-  @Column()
-  password: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
@@ -25,8 +22,6 @@ export class User {
   })
   updatedAt: Date;
 
-  @OneToMany(() => Question, (question) => question.user, {
-    lazy: true,
-  })
-  questions: Question[];
+  @OneToMany(() => Answer, (answer) => answer.respondent)
+  answers: Answer[];
 }
