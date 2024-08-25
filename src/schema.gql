@@ -19,8 +19,8 @@ scalar DateTime
 type AnswerModel {
   id: Int!
   question: QuestionModel!
-  choice: AnswerChoiceModel!
-  description: String!
+  choice: AnswerChoiceModel
+  description: String
   respondent: RespondentModel!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -74,6 +74,7 @@ type Mutation {
   createQuestionWithAnswerChoices(createQuestionInput: CreateQuestionInput!, createAnswerChoicesInput: [CreateAnswerChoiceInput!]!): QuestionModel!
   login(loginInput: LoginInput!): LoginResponse!
   createUser(createUserInput: CreateUserInput!): UserModel!
+  createAnswerWithRespondent(createAnswerInput: CreateAnswerInput!, createRespondentInput: CreateRespondentInput!): AnswerModel!
 }
 
 input CreateQuestionInput {
@@ -96,4 +97,15 @@ input CreateUserInput {
   name: String!
   email: String!
   password: String!
+}
+
+input CreateAnswerInput {
+  questionId: Int!
+  choiceId: Int
+  description: String
+}
+
+input CreateRespondentInput {
+  name: String!
+  email: String!
 }

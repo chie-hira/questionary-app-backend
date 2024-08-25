@@ -11,10 +11,10 @@ export class AnswerModel {
   @Field(() => QuestionModel)
   question: QuestionModel;
 
-  @Field(() => AnswerChoiceModel)
+  @Field(() => AnswerChoiceModel, { nullable: true })
   choice: AnswerChoiceModel;
 
-  @Field()
+  @Field({ nullable: true })
   description: string;
 
   @Field(() => RespondentModel)

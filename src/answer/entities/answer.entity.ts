@@ -1,9 +1,16 @@
 import { AnswerChoice } from 'src/answerChoice/entities/answerChoice.entity';
 import { Question } from 'src/question/entities/question.entity';
 import { Respondent } from 'src/respondent/entities/respondent.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  Unique,
+} from 'typeorm';
 
 @Entity('answers')
+@Unique(['question', 'respondent'])
 export class Answer {
   @PrimaryGeneratedColumn()
   id: number;
