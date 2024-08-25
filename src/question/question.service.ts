@@ -41,10 +41,18 @@ export class QuestionService {
     try {
       const { question, answerFormat, userId } = createQuestionInput;
 
+      const user = await queryRunner.manager.findOne(User, {
+        where: { id: userId },
+      });
+
+      if (!user) {
+        throw new Error('User not found');
+      }
+
       const newQuestion = this.questionRepository.create({
         question,
         answerFormat,
-        user: { id: userId } as User,
+        user,
       });
       await queryRunner.manager.save(newQuestion);
 

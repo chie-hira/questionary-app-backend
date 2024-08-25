@@ -32,6 +32,22 @@ export class AnswerService {
     const { questionId, answerChoiceId, description } = createAnswerInput;
 
     try {
+      const question = await queryRunner.manager.findOne(Question, {
+        where: { id: questionId },
+      });
+
+      if (!question) {
+        throw new Error('Question not found');
+      }
+
+      const answerChoice = await queryRunner.manager.findOne(AnswerChoice, {
+        where: { id: answerChoiceId },
+      });
+
+      if (!answerChoice) {
+        throw new Error('AnswerChoice not found');
+      }
+
       let respondent = await this.respondentRepository.findOne({
         where: { email },
       });
@@ -46,7 +62,7 @@ export class AnswerService {
 
       const existingAnswer = await this.answerRepository.findOne({
         where: {
-          question: { id: questionId },
+          question,
           respondent,
         },
       });
@@ -58,8 +74,8 @@ export class AnswerService {
       }
 
       const newAnswer = await this.answerRepository.create({
-        question: { id: questionId } as Question,
-        answerChoice: { id: answerChoiceId } as AnswerChoice,
+        question,
+        answerChoice,
         description,
         respondent,
       });
