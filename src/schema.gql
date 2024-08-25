@@ -64,6 +64,7 @@ type Query {
   getAllQuestions: [QuestionModel!]!
   getQuestionsByUser(userId: Int!): [QuestionModel!]!
   findOneByEmail(getUserArgs: GetUserArgs!): UserModel
+  getAnswersByUser(userId: Int!): [AnswerModel!]!
 }
 
 input GetUserArgs {

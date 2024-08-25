@@ -19,6 +19,19 @@ export class AnswerService {
     private readonly dataSource: DataSource,
   ) {}
 
+  async getAnswersByUser(userId: number): Promise<AnswerModel[]> {
+    return await this.answerRepository.find({
+      relations: ['question', 'question.user', 'answerChoice', 'respondent'],
+      where: {
+        question: {
+          user: {
+            id: userId,
+          },
+        },
+      },
+    });
+  }
+
   async createAnswerWithRespondent(
     createAnswerInput: CreateAnswerInput,
     createRespondentInput: CreateRespondentInput,
