@@ -25,6 +25,8 @@ export class User {
   })
   updatedAt: Date;
 
-  @OneToMany(() => Question, (question) => question.user)
+  @OneToMany(() => Question, (question) => question.user, {
+    lazy: true,
+  })
   questions: Question[];
 }

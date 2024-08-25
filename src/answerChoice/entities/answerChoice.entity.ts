@@ -1,8 +1,10 @@
+import { Answer } from 'src/answer/entities/answer.entity';
 import { Question } from '../../question/entities/question.entity';
 import {
   Column,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
@@ -31,4 +33,7 @@ export class AnswerChoice {
     nullable: false,
   })
   question: Question;
+
+  @OneToMany(() => Answer, (answer) => answer.choice)
+  answers: Answer[];
 }

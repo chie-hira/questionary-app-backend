@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Answer } from 'src/answer/entities/answer.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('respondents')
 export class Respondent {
@@ -20,4 +21,7 @@ export class Respondent {
     onUpdate: 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
+
+  @OneToMany(() => Answer, (answer) => answer.respondent)
+  answers: Answer[];
 }
