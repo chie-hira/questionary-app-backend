@@ -12,7 +12,7 @@ export class AnswerModel {
   question: QuestionModel;
 
   @Field(() => AnswerChoiceModel, { nullable: true })
-  choice: AnswerChoiceModel;
+  answerChoice: AnswerChoiceModel;
 
   @Field({ nullable: true })
   description: string;

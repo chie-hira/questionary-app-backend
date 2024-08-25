@@ -8,7 +8,7 @@ export class CreateAnswerInput {
   questionId: number;
 
   @Field(() => Int, { nullable: true })
-  choiceId?: number;
+  answerChoiceId?: number;
 
   @Field({ nullable: true })
   description?: string;

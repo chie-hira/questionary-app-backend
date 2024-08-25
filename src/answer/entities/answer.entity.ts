@@ -22,11 +22,11 @@ export class Answer {
   })
   question: Question;
 
-  @ManyToOne(() => AnswerChoice, (choice) => choice.answers, {
+  @ManyToOne(() => AnswerChoice, (answerChoice) => answerChoice.answers, {
     onDelete: 'CASCADE',
     nullable: true,
   })
-  choice: AnswerChoice;
+  answerChoice: AnswerChoice;
 
   @Column({ nullable: true })
   description: string;

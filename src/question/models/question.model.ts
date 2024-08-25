@@ -22,7 +22,7 @@ export class QuestionModel {
   updatedAt: Date;
 
   @Field(() => [AnswerChoiceModel])
-  choices: AnswerChoiceModel[];
+  answerChoices: AnswerChoiceModel[];
 
   @Field(() => [AnswerModel])
   answers: AnswerModel[];

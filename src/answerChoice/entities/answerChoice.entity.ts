@@ -10,13 +10,13 @@ import {
 } from 'typeorm';
 
 @Entity('answer_choices')
-@Unique(['choice', 'question'])
+@Unique(['answerChoice', 'question'])
 export class AnswerChoice {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  choice: string;
+  answerChoice: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
@@ -28,12 +28,12 @@ export class AnswerChoice {
   })
   updatedAt: Date;
 
-  @ManyToOne(() => Question, (question) => question.choices, {
+  @ManyToOne(() => Question, (question) => question.answerChoices, {
     onDelete: 'CASCADE',
     nullable: false,
   })
   question: Question;
 
-  @OneToMany(() => Answer, (answer) => answer.choice)
+  @OneToMany(() => Answer, (answer) => answer.answerChoice)
   answers: Answer[];
 }

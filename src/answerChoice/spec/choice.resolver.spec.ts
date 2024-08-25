@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AnswerChoiceResolver } from '../answerChoice.resolver';
 
-describe('ChoiceResolver', () => {
+describe('AnswerChoiceResolver', () => {
   let resolver: AnswerChoiceResolver;
 
   beforeEach(async () => {

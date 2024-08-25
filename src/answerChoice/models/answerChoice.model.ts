@@ -8,7 +8,7 @@ export class AnswerChoiceModel {
   id: number;
 
   @Field()
-  choice: string;
+  answerChoice: string;
 
   @Field()
   createdAt: Date;

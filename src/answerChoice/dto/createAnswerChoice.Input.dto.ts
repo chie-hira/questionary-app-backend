@@ -5,7 +5,7 @@ import { IsNotEmpty } from 'class-validator';
 export class CreateAnswerChoiceInput {
   @Field()
   @IsNotEmpty()
-  choice: string;
+  answerChoice: string;
 
   @Field(() => Int)
   questionId: number;

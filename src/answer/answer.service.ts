@@ -23,7 +23,7 @@ export class AnswerService {
     createRespondentInput: CreateRespondentInput,
   ): Promise<AnswerModel> {
     const { name, email } = createRespondentInput;
-    const { questionId, choiceId, description } = createAnswerInput;
+    const { questionId, answerChoiceId, description } = createAnswerInput;
 
     const respondent = await this.respondentRepository.findOne({
       where: { email },
@@ -52,7 +52,7 @@ export class AnswerService {
 
     const newAnswer = await this.answerRepository.create({
       question: { id: questionId } as Question,
-      choice: { id: choiceId } as AnswerChoice,
+      answerChoice: { id: answerChoiceId } as AnswerChoice,
       description,
       respondent,
     });
@@ -60,7 +60,7 @@ export class AnswerService {
 
     const savedAnswer = await this.answerRepository.findOne({
       where: { id: newAnswer.id },
-      relations: ['question', 'choice', 'respondent'],
+      relations: ['question', 'answerChoice', 'respondent'],
     });
 
     return savedAnswer as AnswerModel;

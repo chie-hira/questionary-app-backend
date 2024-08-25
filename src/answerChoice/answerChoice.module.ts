@@ -8,4 +8,4 @@ import { AnswerChoice } from './entities/answerChoice.entity';
   imports: [TypeOrmModule.forFeature([AnswerChoice])],
   providers: [AnswerChoiceResolver, AnswerChoiceService],
 })
-export class ChoiceModule {}
+export class AnswerChoiceModule {}

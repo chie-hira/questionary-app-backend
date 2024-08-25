@@ -19,7 +19,7 @@ scalar DateTime
 type AnswerModel {
   id: Int!
   question: QuestionModel!
-  choice: AnswerChoiceModel
+  answerChoice: AnswerChoiceModel
   description: String
   respondent: RespondentModel!
   createdAt: DateTime!
@@ -28,7 +28,7 @@ type AnswerModel {
 
 type AnswerChoiceModel {
   id: Int!
-  choice: String!
+  answerChoice: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   question: QuestionModel!
@@ -41,7 +41,7 @@ type QuestionModel {
   answerFormat: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-  choices: [AnswerChoiceModel!]!
+  answerChoices: [AnswerChoiceModel!]!
   answers: [AnswerModel!]!
   user: UserModel!
 }
@@ -84,7 +84,7 @@ input CreateQuestionInput {
 }
 
 input CreateAnswerChoiceInput {
-  choice: String!
+  answerChoice: String!
   questionId: Int!
 }
 
@@ -101,7 +101,7 @@ input CreateUserInput {
 
 input CreateAnswerInput {
   questionId: Int!
-  choiceId: Int
+  answerChoiceId: Int
   description: String
 }
 

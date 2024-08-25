@@ -31,8 +31,8 @@ export class Question {
   })
   updatedAt: Date;
 
-  @OneToMany(() => AnswerChoice, (choice) => choice.question)
-  choices: AnswerChoice[];
+  @OneToMany(() => AnswerChoice, (answerChoice) => answerChoice.question)
+  answerChoices: AnswerChoice[];
 
   @OneToMany(() => Answer, (answer) => answer.question)
   answers: Answer[];

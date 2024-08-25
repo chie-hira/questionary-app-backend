@@ -14,7 +14,7 @@ export class QuestionService {
     @InjectRepository(Question)
     private readonly questionRepository: Repository<QuestionModel>,
     @InjectRepository(AnswerChoice)
-    private readonly choiceRepository: Repository<AnswerChoice>,
+    private readonly answerChoiceRepository: Repository<AnswerChoice>,
   ) {}
 
   async getAllQuestions(): Promise<QuestionModel[]> {
@@ -23,7 +23,7 @@ export class QuestionService {
 
   async getQuestionsByUser(userId: number): Promise<QuestionModel[]> {
     return await this.questionRepository.find({
-      relations: ['user', 'choices'],
+      relations: ['user', 'answerChoices'],
       where: { user: { id: userId } },
     });
   }
@@ -41,17 +41,19 @@ export class QuestionService {
     });
     await this.questionRepository.save(newQuestion);
 
-    const newChoices = createAnswerChoicesInput.map((choiceInput) => {
-      return this.choiceRepository.create({
-        choice: choiceInput.choice,
-        question: newQuestion,
-      });
-    });
-    await this.choiceRepository.save(newChoices);
+    const newAnswerChoices = createAnswerChoicesInput.map(
+      (answerChoiceInput) => {
+        return this.answerChoiceRepository.create({
+          answerChoice: answerChoiceInput.answerChoice,
+          question: newQuestion,
+        });
+      },
+    );
+    await this.answerChoiceRepository.save(newAnswerChoices);
 
     const savedQuestion = await this.questionRepository.findOne({
       where: { id: newQuestion.id },
-      relations: ['user', 'choices'],
+      relations: ['user', 'answerChoices'],
     });
 
     return savedQuestion as QuestionModel;
