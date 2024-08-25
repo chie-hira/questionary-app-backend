@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { DataSource, QueryRunner, Repository } from 'typeorm';
 import { QuestionModel } from './models/question.model';
 import { Question } from './entities/question.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,6 +15,7 @@ export class QuestionService {
     private readonly questionRepository: Repository<QuestionModel>,
     @InjectRepository(AnswerChoice)
     private readonly answerChoiceRepository: Repository<AnswerChoice>,
+    private readonly dataSource: DataSource,
   ) {}
 
   async getAllQuestions(): Promise<QuestionModel[]> {
@@ -32,30 +33,44 @@ export class QuestionService {
     createQuestionInput: CreateQuestionInput,
     createAnswerChoicesInput: CreateAnswerChoiceInput[],
   ): Promise<QuestionModel> {
-    const { question, answerFormat, userId } = createQuestionInput;
+    const queryRunner: QueryRunner = this.dataSource.createQueryRunner();
 
-    const newQuestion = this.questionRepository.create({
-      question,
-      answerFormat,
-      user: { id: userId } as User,
-    });
-    await this.questionRepository.save(newQuestion);
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
 
-    const newAnswerChoices = createAnswerChoicesInput.map(
-      (answerChoiceInput) => {
-        return this.answerChoiceRepository.create({
-          answerChoice: answerChoiceInput.answerChoice,
-          question: newQuestion,
-        });
-      },
-    );
-    await this.answerChoiceRepository.save(newAnswerChoices);
+    try {
+      const { question, answerFormat, userId } = createQuestionInput;
 
-    const savedQuestion = await this.questionRepository.findOne({
-      where: { id: newQuestion.id },
-      relations: ['user', 'answerChoices'],
-    });
+      const newQuestion = this.questionRepository.create({
+        question,
+        answerFormat,
+        user: { id: userId } as User,
+      });
+      await queryRunner.manager.save(newQuestion);
 
-    return savedQuestion as QuestionModel;
+      const newAnswerChoices = createAnswerChoicesInput.map(
+        (answerChoiceInput) => {
+          return this.answerChoiceRepository.create({
+            answerChoice: answerChoiceInput.answerChoice,
+            question: newQuestion,
+          });
+        },
+      );
+      await queryRunner.manager.save(newAnswerChoices);
+
+      await queryRunner.commitTransaction();
+
+      const savedQuestion = await this.questionRepository.findOne({
+        where: { id: newQuestion.id },
+        relations: ['user', 'answerChoices'],
+      });
+
+      return savedQuestion as QuestionModel;
+    } catch (error: unknown) {
+      await queryRunner.rollbackTransaction();
+      throw error;
+    } finally {
+      await queryRunner.release(); // QueryRunnerを終了して解放
+    }
   }
 }
