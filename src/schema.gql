@@ -86,7 +86,6 @@ input CreateQuestionInput {
 
 input CreateAnswerChoiceInput {
   answerChoice: String!
-  questionId: Int!
 }
 
 input LoginInput {
