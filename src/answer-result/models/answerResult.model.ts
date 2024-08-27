@@ -1,18 +1,19 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { AnswerChoiceModel } from 'src/answerChoice/models/answerChoice.model';
+import { AnswerDetailModel } from 'src/answer-detail/models/answerDetail.model';
+// import { AnswerChoiceModel } from 'src/answerChoice/models/answerChoice.model';
 import { QuestionModel } from 'src/question/models/question.model';
 import { RespondentModel } from 'src/respondent/models/respondent.model';
 
 @ObjectType()
-export class AnswerModel {
+export class AnswerResultModel {
   @Field(() => Int)
   id: number;
 
   @Field(() => QuestionModel)
   question: QuestionModel;
 
-  @Field(() => AnswerChoiceModel, { nullable: true })
-  answerChoice: AnswerChoiceModel;
+  @Field(() => [AnswerDetailModel], { nullable: true })
+  answerDetails: AnswerDetailModel[];
 
   @Field({ nullable: true })
   description: string;

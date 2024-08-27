@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AnswerChoiceResolver } from '../answerChoice.resolver';
+import { AnswerChoiceResolver } from '../answer-choice.resolver';
 
 describe('AnswerChoiceResolver', () => {
   let resolver: AnswerChoiceResolver;

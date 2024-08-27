@@ -1,4 +1,4 @@
-import { Answer } from 'src/answer/entities/answer.entity';
+import { AnswerDetail } from 'src/answer-detail/entities/answerDetail.entity';
 import { Question } from '../../question/entities/question.entity';
 import {
   Column,
@@ -34,6 +34,8 @@ export class AnswerChoice {
   })
   question: Question;
 
-  @OneToMany(() => Answer, (answer) => answer.answerChoice)
-  answers: Answer[];
+  @OneToMany(() => AnswerDetail, (answerDetail) => answerDetail.answerChoice, {
+    cascade: true,
+  })
+  answerDetails: AnswerDetail[];
 }

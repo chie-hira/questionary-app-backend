@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AnswerChoiceResolver } from './answerChoice.resolver';
-import { AnswerChoiceService } from './answerChoice.service';
+import { AnswerChoiceResolver } from './answer-choice.resolver';
+import { AnswerChoiceService } from './answer-choice.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AnswerChoice } from './entities/answerChoice.entity';
 

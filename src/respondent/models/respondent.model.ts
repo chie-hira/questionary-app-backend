@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { AnswerModel } from 'src/answer/models/answer.model';
+import { AnswerResultModel } from 'src/answer-result/models/answerResult.model';
 
 @ObjectType()
 export class RespondentModel {
@@ -18,6 +18,6 @@ export class RespondentModel {
   @Field()
   updatedAt: Date;
 
-  @Field(() => [AnswerModel])
-  answers: AnswerModel[];
+  @Field(() => [AnswerResultModel])
+  answers: AnswerResultModel[];
 }

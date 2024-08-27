@@ -8,7 +8,7 @@ type RespondentModel {
   email: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-  answers: [AnswerModel!]!
+  answers: [AnswerResultModel!]!
 }
 
 """
@@ -16,12 +16,21 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type AnswerModel {
+type AnswerResultModel {
   id: Int!
   question: QuestionModel!
-  answerChoice: AnswerChoiceModel
+  answerDetails: [AnswerDetailModel!]
   description: String
   respondent: RespondentModel!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type AnswerDetailModel {
+  id: Int!
+  answerResult: AnswerResultModel!
+  answerChoice: AnswerChoiceModel!
+  question: QuestionModel!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -32,7 +41,7 @@ type AnswerChoiceModel {
   createdAt: DateTime!
   updatedAt: DateTime!
   question: QuestionModel!
-  answers: [AnswerModel!]!
+  answerDetails: [AnswerDetailModel!]!
 }
 
 type QuestionModel {
@@ -42,7 +51,8 @@ type QuestionModel {
   createdAt: DateTime!
   updatedAt: DateTime!
   answerChoices: [AnswerChoiceModel!]!
-  answers: [AnswerModel!]!
+  answerResults: [AnswerResultModel!]!
+  answerDetails: [AnswerDetailModel!]!
   user: UserModel!
 }
 
@@ -63,8 +73,9 @@ type LoginResponse {
 type Query {
   getAllQuestions: [QuestionModel!]!
   getQuestionsByUser(userId: Int!): [QuestionModel!]!
+  getQuestionById(id: Int!): QuestionModel!
   findOneByEmail(getUserArgs: GetUserArgs!): UserModel
-  getAnswersByUser(userId: Int!): [AnswerModel!]!
+  getAnswersByUser(userId: Int!): [AnswerResultModel!]!
 }
 
 input GetUserArgs {
@@ -75,7 +86,7 @@ type Mutation {
   createQuestionWithAnswerChoices(createQuestionInput: CreateQuestionInput!, createAnswerChoicesInput: [CreateAnswerChoiceInput!]!): QuestionModel!
   login(loginInput: LoginInput!): LoginResponse!
   createUser(createUserInput: CreateUserInput!): UserModel!
-  createAnswerWithRespondent(createAnswerInput: CreateAnswerInput!, createRespondentInput: CreateRespondentInput!): AnswerModel!
+  createAnswerWithRespondent(createAnswerResultInput: CreateAnswerResultInput!, createAnswerDetailsInput: [CreateAnswerDetailInput!]!, createRespondentInput: CreateRespondentInput!): AnswerResultModel!
 }
 
 input CreateQuestionInput {
@@ -99,10 +110,13 @@ input CreateUserInput {
   password: String!
 }
 
-input CreateAnswerInput {
+input CreateAnswerResultInput {
   questionId: Int!
-  answerChoiceId: Int
   description: String
+}
+
+input CreateAnswerDetailInput {
+  answerChoiceId: Int!
 }
 
 input CreateRespondentInput {
