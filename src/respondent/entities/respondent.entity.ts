@@ -1,4 +1,4 @@
-import { Answer } from 'src/answer/entities/answer.entity';
+import { AnswerResult } from 'src/answer-result/entities/answerResult.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('respondents')
@@ -22,6 +22,6 @@ export class Respondent {
   })
   updatedAt: Date;
 
-  @OneToMany(() => Answer, (answer) => answer.respondent)
-  answers: Answer[];
+  @OneToMany(() => AnswerResult, (answer) => answer.respondent)
+  answers: AnswerResult[];
 }

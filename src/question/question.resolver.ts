@@ -2,7 +2,7 @@ import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { QuestionService } from './question.service';
 import { QuestionModel } from './models/question.model';
 import { CreateQuestionInput } from './dto/createQuestion.input.dto';
-import { CreateAnswerChoiceInput } from '../answerChoice/dto/createAnswerChoice.input.dto';
+import { CreateAnswerChoiceInput } from '../answer-choice/dto/createAnswerChoice.input.dto';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
