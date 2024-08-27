@@ -1,6 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { AnswerDetailModel } from 'src/answer-detail/models/answerDetail.model';
-// import { AnswerChoiceModel } from 'src/answerChoice/models/answerChoice.model';
 import { QuestionModel } from 'src/question/models/question.model';
 import { RespondentModel } from 'src/respondent/models/respondent.model';
 

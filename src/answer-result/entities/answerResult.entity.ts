@@ -1,4 +1,3 @@
-// import { AnswerChoice } from 'src/answerChoice/entities/answerChoice.entity';
 import { AnswerDetail } from 'src/answer-detail/entities/answerDetail.entity';
 import { Question } from 'src/question/entities/question.entity';
 import { Respondent } from 'src/respondent/entities/respondent.entity';
@@ -23,12 +22,6 @@ export class AnswerResult {
     lazy: true,
   })
   question: Question;
-
-  // @ManyToOne(() => AnswerChoice, (answerChoice) => answerChoice.answers, {
-  //   onDelete: 'CASCADE',
-  //   nullable: true,
-  // })
-  // answerChoice: AnswerChoice;
 
   @Column({ nullable: true })
   description: string;
