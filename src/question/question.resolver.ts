@@ -24,6 +24,13 @@ export class QuestionResolver {
     return this.questionService.getQuestionsByUser(userId);
   }
 
+  @Query(() => QuestionModel)
+  async getQuestionById(
+    @Args('id', { type: () => Int }) id: number,
+  ): Promise<QuestionModel> {
+    return this.questionService.getQuestionById(id);
+  }
+
   @Mutation(() => QuestionModel)
   @UseGuards(JwtAuthGuard)
   async createQuestionWithAnswerChoices(

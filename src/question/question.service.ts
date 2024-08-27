@@ -29,6 +29,13 @@ export class QuestionService {
     });
   }
 
+  async getQuestionById(id: number): Promise<QuestionModel> {
+    return await this.questionRepository.findOne({
+      relations: ['answerChoices'],
+      where: { id },
+    });
+  }
+
   async createQuestionWithAnswerChoices(
     createQuestionInput: CreateQuestionInput,
     createAnswerChoicesInput: CreateAnswerChoiceInput[],
