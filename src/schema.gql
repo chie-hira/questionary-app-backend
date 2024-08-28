@@ -70,12 +70,22 @@ type LoginResponse {
   user: UserModel!
 }
 
+type AggregatedAnswerModel {
+  questionId: Int!
+  question: String!
+  choiceId: Int!
+  choice: String!
+  count: Int!
+}
+
 type Query {
   getAllQuestions: [QuestionModel!]!
   getQuestionsByUser(userId: Int!): [QuestionModel!]!
   getQuestionById(id: Int!): QuestionModel!
   findOneByEmail(getUserArgs: GetUserArgs!): UserModel
   getAnswersByUser(userId: Int!): [AnswerResultModel!]!
+  getAnswerDetailsByQuestionId(questionId: Int!): [AnswerDetailModel!]!
+  getAggregatedAnswerByQuestionId(questionId: Int!): [AggregatedAnswerModel!]!
 }
 
 input GetUserArgs {
