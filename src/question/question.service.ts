@@ -88,4 +88,15 @@ export class QuestionService {
       await queryRunner.release(); // QueryRunnerを終了して解放
     }
   }
+
+  async deleteQuestion(id: number): Promise<QuestionModel> {
+    const deleteQuestion = this.questionRepository.findOne({ where: { id } });
+    const deleteResult = this.questionRepository.delete(id);
+
+    if ((await deleteResult).affected) {
+      return deleteQuestion;
+    } else {
+      throw new Error('Question not found');
+    }
+  }
 }

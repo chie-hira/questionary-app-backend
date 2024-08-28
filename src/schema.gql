@@ -94,6 +94,7 @@ input GetUserArgs {
 
 type Mutation {
   createQuestionWithAnswerChoices(createQuestionInput: CreateQuestionInput!, createAnswerChoicesInput: [CreateAnswerChoiceInput!]!): QuestionModel!
+  deleteQuestion(id: Int!): QuestionModel!
   login(loginInput: LoginInput!): LoginResponse!
   createUser(createUserInput: CreateUserInput!): UserModel!
   createAnswerWithRespondent(createAnswerResultInput: CreateAnswerResultInput!, createAnswerDetailsInput: [CreateAnswerDetailInput!]!, createRespondentInput: CreateRespondentInput!): AnswerResultModel!
