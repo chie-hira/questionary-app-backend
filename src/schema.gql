@@ -70,12 +70,22 @@ type LoginResponse {
   user: UserModel!
 }
 
+type AggregatedAnswerModel {
+  questionId: Int!
+  question: String!
+  choiceId: Int!
+  choice: String!
+  count: Int!
+}
+
 type Query {
   getAllQuestions: [QuestionModel!]!
   getQuestionsByUser(userId: Int!): [QuestionModel!]!
   getQuestionById(id: Int!): QuestionModel!
   findOneByEmail(getUserArgs: GetUserArgs!): UserModel
   getAnswersByUser(userId: Int!): [AnswerResultModel!]!
+  getAnswerDetailsByQuestionId(questionId: Int!): [AnswerDetailModel!]!
+  getAggregatedAnswerByQuestionId(questionId: Int!): [AggregatedAnswerModel!]!
 }
 
 input GetUserArgs {
@@ -84,6 +94,7 @@ input GetUserArgs {
 
 type Mutation {
   createQuestionWithAnswerChoices(createQuestionInput: CreateQuestionInput!, createAnswerChoicesInput: [CreateAnswerChoiceInput!]!): QuestionModel!
+  deleteQuestion(id: Int!): QuestionModel!
   login(loginInput: LoginInput!): LoginResponse!
   createUser(createUserInput: CreateUserInput!): UserModel!
   createAnswerWithRespondent(createAnswerResultInput: CreateAnswerResultInput!, createAnswerDetailsInput: [CreateAnswerDetailInput!]!, createRespondentInput: CreateRespondentInput!): AnswerResultModel!

@@ -47,4 +47,12 @@ export class QuestionResolver {
       createAnswerChoicesInput,
     );
   }
+
+  @Mutation(() => QuestionModel)
+  @UseGuards(JwtAuthGuard)
+  async deleteQuestion(
+    @Args('id', { type: () => Int }) id: number,
+  ): Promise<QuestionModel> {
+    return this.questionService.deleteQuestion(id);
+  }
 }

@@ -1,5 +1,5 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional, MaxLength } from 'class-validator';
 
 @InputType()
 export class CreateAnswerResultInput {
@@ -7,9 +7,8 @@ export class CreateAnswerResultInput {
   @IsNotEmpty()
   questionId: number;
 
-  // @Field(() => Int, { nullable: true })
-  // answerChoiceId?: number;
-
   @Field({ nullable: true })
+  @IsOptional()
+  @MaxLength(200)
   description?: string;
 }
