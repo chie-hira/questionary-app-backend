@@ -18,10 +18,6 @@ export class QuestionService {
     private readonly dataSource: DataSource,
   ) {}
 
-  async getAllQuestions(): Promise<QuestionModel[]> {
-    return await this.questionRepository.find();
-  }
-
   async getQuestionsByUser(userId: number): Promise<QuestionModel[]> {
     return await this.questionRepository.find({
       relations: ['user', 'answerChoices'],

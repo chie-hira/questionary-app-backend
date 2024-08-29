@@ -1,3 +1,5 @@
+# Schema Types
+
 <details>
   <summary><strong>Table of Contents</strong></summary>
 
@@ -41,11 +43,6 @@
 </thead>
 <tbody>
 <tr>
-<td colspan="2" valign="top"><strong>getAllQuestions</strong></td>
-<td valign="top">[<a href="#questionmodel">QuestionModel</a>!]!</td>
-<td></td>
-</tr>
-<tr>
 <td colspan="2" valign="top"><strong>getQuestionsByUser</strong></td>
 <td valign="top">[<a href="#questionmodel">QuestionModel</a>!]!</td>
 <td></td>
@@ -76,28 +73,8 @@
 <td></td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong>getAnswersByUser</strong></td>
-<td valign="top">[<a href="#answerresultmodel">AnswerResultModel</a>!]!</td>
-<td></td>
-</tr>
-<tr>
-<td colspan="2" align="right" valign="top">userId</td>
-<td valign="top"><a href="#int">Int</a>!</td>
-<td></td>
-</tr>
-<tr>
 <td colspan="2" valign="top"><strong>getDescriptionAnswersByQuestionId</strong></td>
 <td valign="top">[<a href="#answerresultmodel">AnswerResultModel</a>!]!</td>
-<td></td>
-</tr>
-<tr>
-<td colspan="2" align="right" valign="top">questionId</td>
-<td valign="top"><a href="#int">Int</a>!</td>
-<td></td>
-</tr>
-<tr>
-<td colspan="2" valign="top"><strong>getAnswerDetailsByQuestionId</strong></td>
-<td valign="top">[<a href="#answerdetailmodel">AnswerDetailModel</a>!]!</td>
 <td></td>
 </tr>
 <tr>

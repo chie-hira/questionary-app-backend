@@ -23,25 +23,6 @@ export class AnswerResultService {
     private readonly dataSource: DataSource,
   ) {}
 
-  async getAnswersByUser(userId: number): Promise<AnswerResultModel[]> {
-    return await this.answerResultRepository.find({
-      relations: [
-        'question',
-        'question.user',
-        'respondent',
-        'answerDetails',
-        'answerDetails.answerChoice',
-      ],
-      where: {
-        question: {
-          user: {
-            id: userId,
-          },
-        },
-      },
-    });
-  }
-
   async getDescriptionAnswersByQuestionId(
     questionId: number,
   ): Promise<AnswerResultModel[]> {

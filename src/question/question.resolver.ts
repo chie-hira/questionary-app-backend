@@ -12,12 +12,6 @@ export class QuestionResolver {
 
   @Query(() => [QuestionModel])
   @UseGuards(JwtAuthGuard)
-  async getAllQuestions(): Promise<QuestionModel[]> {
-    return this.questionService.getAllQuestions();
-  }
-
-  @Query(() => [QuestionModel])
-  @UseGuards(JwtAuthGuard)
   async getQuestionsByUser(
     @Args('userId', { type: () => Int }) userId: number,
   ): Promise<QuestionModel[]> {
