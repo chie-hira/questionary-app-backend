@@ -4,7 +4,7 @@
 
 type RespondentModel {
   id: Int!
-  name: String!
+  name: String
   email: String!
   createdAt: DateTime!
   updatedAt: DateTime!
