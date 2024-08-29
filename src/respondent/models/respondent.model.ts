@@ -6,7 +6,7 @@ export class RespondentModel {
   @Field(() => Int)
   id: number;
 
-  @Field()
+  @Field({ nullable: true })
   name: string;
 
   @Field()

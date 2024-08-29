@@ -19,6 +19,15 @@ export class AnswerResultResolver {
     return this.answerResultService.getAnswersByUser(userId);
   }
 
+  @Query(() => [AnswerResultModel])
+  async getDescriptionAnswersByQuestionId(
+    @Args('questionId', { type: () => Int }) questionId: number,
+  ): Promise<AnswerResultModel[]> {
+    return this.answerResultService.getDescriptionAnswersByQuestionId(
+      questionId,
+    );
+  }
+
   @Mutation(() => AnswerResultModel)
   async createAnswerWithRespondent(
     @Args('createAnswerResultInput')

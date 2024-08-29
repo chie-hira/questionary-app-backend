@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Respondent } from 'src/respondent/entities/respondent.entity';
-import { DataSource, QueryRunner, Repository } from 'typeorm';
+import { DataSource, IsNull, Not, QueryRunner, Repository } from 'typeorm';
 import { CreateRespondentInput } from 'src/respondent/dto/create.respondent.input.dto';
 import { Question } from 'src/question/entities/question.entity';
 import { AnswerResult } from './entities/answerResult.entity';
@@ -38,6 +38,20 @@ export class AnswerResultService {
             id: userId,
           },
         },
+      },
+    });
+  }
+
+  async getDescriptionAnswersByQuestionId(
+    questionId: number,
+  ): Promise<AnswerResultModel[]> {
+    return await this.answerResultRepository.find({
+      relations: ['question', 'respondent'],
+      where: {
+        question: {
+          id: questionId,
+        },
+        description: Not(IsNull()) || Not(''),
       },
     });
   }

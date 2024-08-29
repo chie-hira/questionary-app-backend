@@ -4,7 +4,7 @@
 
 type RespondentModel {
   id: Int!
-  name: String!
+  name: String
   email: String!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -82,6 +82,7 @@ type Query {
   getQuestionById(id: Int!): QuestionModel!
   findOneByEmail(getUserArgs: GetUserArgs!): UserModel
   getAnswersByUser(userId: Int!): [AnswerResultModel!]!
+  getDescriptionAnswersByQuestionId(questionId: Int!): [AnswerResultModel!]!
   getAnswerDetailsByQuestionId(questionId: Int!): [AnswerDetailModel!]!
   getAggregatedAnswerByQuestionId(questionId: Int!): [AggregatedAnswerModel!]!
 }
