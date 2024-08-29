@@ -1,5 +1,14 @@
 # questionary-app-backend
 
+## 機能
+|項目|概要|
+|:--|:--|
+|ログイン機能|管理画面はログインでアクセス制御ができる|
+|アンケート作成機能|管理画面から選択式アンケートを作成できる<br> ・選択式アンケートは1間の単一選択式の質問で構成される<br> ・質問は、1つの質問文と、1個以上の選択肢で構成される<br> ・選択式アンケートを作成すると回答URLが発行される<br> ・複数回答可能な選択式質問を作れるようにする<br> ・記述式の自由回答ができる質問を作れるようにする|
+|アンケート回答機能|回答URLにアクセスすると、アンケートが表示されて、選択肢から１つ選んで回答ができる<br> ・１人の人が同じ問題に複数回回答出来なくする|
+|アンケート結果集計機能|回答画面からアンケートの回答状況を、選択肢毎の回答者数および%を棒グラフで表示できる|
+|アンケートパッケージ機能|アンケートに複数の質問を作れるようにする|
+
 ## API仕様書
 https://chie-hira.github.io/questionary-app-backend/index.html
 
@@ -7,7 +16,14 @@ https://chie-hira.github.io/questionary-app-backend/index.html
 [APIドキュメント](./docs/schema.md)
 
 ## ER図(現状)
+### パッケージ機能なし
 ![ER](https://github.com/user-attachments/assets/e743c151-b38d-40ad-9e42-b547e8dce82c)
+
+## ER図(改修案)
+### パッケージ機能追加
+![ER2](https://github.com/user-attachments/assets/72a3e2af-7c15-498a-8420-89cce944bb68)
+
+---
 
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
