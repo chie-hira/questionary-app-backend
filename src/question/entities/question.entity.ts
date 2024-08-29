@@ -9,7 +9,6 @@ import { AnswerFormat } from '../enums/question.enum';
 import { AnswerChoice } from '../../answer-choice/entities/answerChoice.entity';
 import { User } from 'src/user/entities/user.entity';
 import { AnswerResult } from 'src/answer-result/entities/answerResult.entity';
-import { AnswerDetail } from 'src/answer-detail/entities/answerDetail.entity';
 
 @Entity('questions')
 export class Question {
@@ -37,9 +36,6 @@ export class Question {
 
   @OneToMany(() => AnswerResult, (answerResult) => answerResult.question)
   answerResults: AnswerResult[];
-
-  @OneToMany(() => AnswerDetail, (answerDetail) => answerDetail.question)
-  answerDetails: AnswerDetail[];
 
   @ManyToOne(() => User, (user) => user.questions, {
     onDelete: 'CASCADE',

@@ -30,7 +30,6 @@ type AnswerDetailModel {
   id: Int!
   answerResult: AnswerResultModel!
   answerChoice: AnswerChoiceModel!
-  question: QuestionModel!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -52,7 +51,6 @@ type QuestionModel {
   updatedAt: DateTime!
   answerChoices: [AnswerChoiceModel!]!
   answerResults: [AnswerResultModel!]!
-  answerDetails: [AnswerDetailModel!]!
   user: UserModel!
 }
 

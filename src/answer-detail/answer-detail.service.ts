@@ -17,7 +17,7 @@ export class AnswerDetailService {
   ): Promise<AnswerDetailModel[]> {
     return await this.answerDetailRepository.find({
       relations: ['question', 'answerChoice'],
-      where: { question: { id: questionId } },
+      where: { answerResult: { question: { id: questionId } } },
     });
   }
 
@@ -25,8 +25,8 @@ export class AnswerDetailService {
     questionId: number,
   ): Promise<AggregatedAnswerModel[]> {
     const answerDetails = await this.answerDetailRepository.find({
-      relations: ['question', 'answerChoice'],
-      where: { question: { id: questionId } },
+      relations: ['answerResult', 'answerResult.question', 'answerChoice'],
+      where: { answerResult: { question: { id: questionId } } },
     });
 
     const aggregatedAnswer = this.aggregateAnswerDetails(answerDetails);
@@ -45,8 +45,8 @@ export class AnswerDetailService {
 
       if (!aggregatedAnswer) {
         aggregatedAnswer = {
-          questionId: answerDetail.question.id,
-          question: answerDetail.question.question,
+          questionId: answerDetail.answerResult.question.id,
+          question: answerDetail.answerResult.question.question,
           choiceId: answerDetail.answerChoice.id,
           choice: answerDetail.answerChoice.answerChoice,
           count: 1,

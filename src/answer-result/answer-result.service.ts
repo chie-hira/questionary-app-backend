@@ -108,7 +108,6 @@ export class AnswerResultService {
         }
 
         const newAnswerDetail = await this.answerDetailRepository.create({
-          question,
           answerResult: newAnswer,
           answerChoice,
         });

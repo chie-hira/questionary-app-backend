@@ -2,7 +2,6 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { AnswerFormat } from '../enums/question.enum';
 import { AnswerChoiceModel } from '../../answer-choice/models/answerChoice.model';
 import { AnswerResultModel } from 'src/answer-result/models/answerResult.model';
-import { AnswerDetailModel } from 'src/answer-detail/models/answerDetail.model';
 import { UserModel } from 'src/user/models/user.model';
 
 @ObjectType()
@@ -27,9 +26,6 @@ export class QuestionModel {
 
   @Field(() => [AnswerResultModel])
   answerResults: AnswerResultModel[];
-
-  @Field(() => [AnswerDetailModel])
-  answerDetails: AnswerDetailModel[];
 
   @Field(() => UserModel)
   user: UserModel;

@@ -1,7 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { AnswerChoiceModel } from 'src/answer-choice/models/answerChoice.model';
 import { AnswerResultModel } from 'src/answer-result/models/answerResult.model';
-import { QuestionModel } from 'src/question/models/question.model';
 
 @ObjectType()
 export class AnswerDetailModel {
@@ -13,9 +12,6 @@ export class AnswerDetailModel {
 
   @Field(() => AnswerChoiceModel)
   answerChoice: AnswerChoiceModel;
-
-  @Field(() => QuestionModel)
-  question: QuestionModel;
 
   @Field()
   createdAt: Date;
