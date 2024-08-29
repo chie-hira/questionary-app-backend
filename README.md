@@ -1,3 +1,14 @@
+# questionary-app-backend
+
+## API仕様書
+https://chie-hira.github.io/questionary-app-backend/index.html
+
+## APIドキュメント
+[APIドキュメント](./docs/schema.md)
+
+## ER図(現状)
+![ER](https://github.com/user-attachments/assets/e743c151-b38d-40ad-9e42-b547e8dce82c)
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
@@ -83,4 +94,3 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-# questionary-app-backend
