@@ -12,15 +12,6 @@ export class AnswerDetailService {
     private readonly answerDetailRepository: Repository<AnswerDetail>,
   ) {}
 
-  async getAnswerDetailsByQuestionId(
-    questionId: number,
-  ): Promise<AnswerDetailModel[]> {
-    return await this.answerDetailRepository.find({
-      relations: ['question', 'answerChoice'],
-      where: { answerResult: { question: { id: questionId } } },
-    });
-  }
-
   async getAggregatedAnswerByQuestionId(
     questionId: number,
   ): Promise<AggregatedAnswerModel[]> {
@@ -57,6 +48,6 @@ export class AnswerDetailService {
       }
     }
 
-    return aggregatedAnswerList.sort((a, b) => b.count - a.count);
+    return aggregatedAnswerList.sort((a, b) => a.choiceId - b.choiceId);
   }
 }

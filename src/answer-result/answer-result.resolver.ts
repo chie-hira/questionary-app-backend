@@ -1,7 +1,5 @@
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CreateRespondentInput } from 'src/respondent/dto/create.respondent.input.dto';
-import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { AnswerResultService } from './answer-result.service';
 import { AnswerResultModel } from './models/answerResult.model';
 import { CreateAnswerResultInput } from './dto/create.answerResult.input.dto';
@@ -10,14 +8,6 @@ import { CreateAnswerDetailInput } from 'src/answer-detail/dto/create.answerDeta
 @Resolver()
 export class AnswerResultResolver {
   constructor(private readonly answerResultService: AnswerResultService) {}
-
-  @Query(() => [AnswerResultModel])
-  @UseGuards(JwtAuthGuard)
-  async getAnswersByUser(
-    @Args('userId', { type: () => Int }) userId: number,
-  ): Promise<AnswerResultModel[]> {
-    return this.answerResultService.getAnswersByUser(userId);
-  }
 
   @Query(() => [AnswerResultModel])
   async getDescriptionAnswersByQuestionId(
