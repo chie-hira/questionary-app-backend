@@ -82,6 +82,7 @@ type Query {
   getQuestionById(id: Int!): QuestionModel!
   findOneByEmail(getUserArgs: GetUserArgs!): UserModel
   getAnswersByUser(userId: Int!): [AnswerResultModel!]!
+  getDescriptionAnswersByQuestionId(questionId: Int!): [AnswerResultModel!]!
   getAnswerDetailsByQuestionId(questionId: Int!): [AnswerDetailModel!]!
   getAggregatedAnswerByQuestionId(questionId: Int!): [AggregatedAnswerModel!]!
 }
