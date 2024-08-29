@@ -43,6 +43,11 @@
 </thead>
 <tbody>
 <tr>
+<td colspan="2" valign="top"><strong>getAllQuestions</strong></td>
+<td valign="top">[<a href="#questionmodel">QuestionModel</a>!]!</td>
+<td></td>
+</tr>
+<tr>
 <td colspan="2" valign="top"><strong>getQuestionsByUser</strong></td>
 <td valign="top">[<a href="#questionmodel">QuestionModel</a>!]!</td>
 <td></td>
