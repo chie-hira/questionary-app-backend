@@ -9,6 +9,15 @@ import { CreateAnswerDetailInput } from 'src/answer-detail/dto/create.answerDeta
 export class AnswerResultResolver {
   constructor(private readonly answerResultService: AnswerResultService) {}
 
+  @Query(() => Int)
+  async countAnswerRespondentsByQuestionId(
+    @Args('questionId', { type: () => Int }) questionId: number,
+  ): Promise<number> {
+    return this.answerResultService.countAnswerRespondentsByQuestionId(
+      questionId,
+    );
+  }
+
   @Query(() => [AnswerResultModel])
   async getDescriptionAnswersByQuestionId(
     @Args('questionId', { type: () => Int }) questionId: number,

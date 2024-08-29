@@ -23,6 +23,18 @@ export class AnswerResultService {
     private readonly dataSource: DataSource,
   ) {}
 
+  async countAnswerRespondentsByQuestionId(
+    questionId: number,
+  ): Promise<number> {
+    return await this.answerResultRepository.count({
+      where: {
+        question: {
+          id: questionId,
+        },
+      },
+    });
+  }
+
   async getDescriptionAnswersByQuestionId(
     questionId: number,
   ): Promise<AnswerResultModel[]> {

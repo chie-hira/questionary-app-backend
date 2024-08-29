@@ -77,9 +77,11 @@ type AggregatedAnswerModel {
 }
 
 type Query {
+  getAllQuestions: [QuestionModel!]!
   getQuestionsByUser(userId: Int!): [QuestionModel!]!
   getQuestionById(id: Int!): QuestionModel!
   findOneByEmail(getUserArgs: GetUserArgs!): UserModel
+  countAnswerRespondentsByQuestionId(questionId: Int!): Int!
   getDescriptionAnswersByQuestionId(questionId: Int!): [AnswerResultModel!]!
   getAggregatedAnswerByQuestionId(questionId: Int!): [AggregatedAnswerModel!]!
 }

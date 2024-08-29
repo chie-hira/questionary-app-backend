@@ -11,6 +11,11 @@ export class QuestionResolver {
   constructor(private readonly questionService: QuestionService) {}
 
   @Query(() => [QuestionModel])
+  async getAllQuestions(): Promise<QuestionModel[]> {
+    return this.questionService.getAllQuestions();
+  }
+
+  @Query(() => [QuestionModel])
   @UseGuards(JwtAuthGuard)
   async getQuestionsByUser(
     @Args('userId', { type: () => Int }) userId: number,
