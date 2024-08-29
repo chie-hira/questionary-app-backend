@@ -73,6 +73,16 @@
 <td></td>
 </tr>
 <tr>
+<td colspan="2" valign="top"><strong>countAnswerRespondentsByQuestionId</strong></td>
+<td valign="top"><a href="#int">Int</a>!</td>
+<td></td>
+</tr>
+<tr>
+<td colspan="2" align="right" valign="top">questionId</td>
+<td valign="top"><a href="#int">Int</a>!</td>
+<td></td>
+</tr>
+<tr>
 <td colspan="2" valign="top"><strong>getDescriptionAnswersByQuestionId</strong></td>
 <td valign="top">[<a href="#answerresultmodel">AnswerResultModel</a>!]!</td>
 <td></td>
