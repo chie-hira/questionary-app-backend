@@ -7,8 +7,8 @@ import {
 } from 'typeorm';
 import { AnswerFormat } from '../enums/question.enum';
 import { AnswerChoice } from '../../answer-choice/entities/answerChoice.entity';
-import { User } from 'src/user/entities/user.entity';
-import { AnswerResult } from 'src/answer-result/entities/answerResult.entity';
+import { User } from '../../user/entities/user.entity';
+import { AnswerResult } from '../../answer-result/entities/answerResult.entity';
 
 @Entity('questions')
 export class Question {

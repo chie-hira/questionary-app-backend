@@ -1,5 +1,5 @@
-import { AnswerChoice } from 'src/answer-choice/entities/answerChoice.entity';
-import { AnswerResult } from 'src/answer-result/entities/answerResult.entity';
+import { AnswerChoice } from '../../answer-choice/entities/answerChoice.entity';
+import { AnswerResult } from '../../answer-result/entities/answerResult.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('answer_details')

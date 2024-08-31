@@ -1,6 +1,6 @@
-import { AnswerDetail } from 'src/answer-detail/entities/answerDetail.entity';
-import { Question } from 'src/question/entities/question.entity';
-import { Respondent } from 'src/respondent/entities/respondent.entity';
+import { AnswerDetail } from '../../answer-detail/entities/answerDetail.entity';
+import { Question } from '../../question/entities/question.entity';
+import { Respondent } from '../../respondent/entities/respondent.entity';
 import {
   Column,
   Entity,
