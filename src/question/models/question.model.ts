@@ -22,6 +22,7 @@ export class QuestionModel {
   updatedAt: Date;
 
   @Field(() => [AnswerChoiceModel])
+  // @Field(() => [AnswerChoiceModel], { nullable: 'itemsAndList' })
   answerChoices: AnswerChoiceModel[];
 
   @Field(() => [AnswerResultModel])

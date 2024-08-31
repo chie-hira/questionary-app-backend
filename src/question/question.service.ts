@@ -19,7 +19,9 @@ export class QuestionService {
   ) {}
 
   async getAllQuestions(): Promise<QuestionModel[]> {
-    return await this.questionRepository.find();
+    return await this.questionRepository.find({
+      relations: ['user', 'answerChoices'],
+    });
   }
 
   async getQuestionsByUser(userId: number): Promise<QuestionModel[]> {
