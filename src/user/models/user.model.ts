@@ -1,5 +1,5 @@
 import { Field, HideField, Int, ObjectType } from '@nestjs/graphql';
-import { QuestionModel } from 'src/question/models/question.model';
+import { QuestionModel } from '../../question/models/question.model';
 
 @ObjectType()
 export class UserModel {
