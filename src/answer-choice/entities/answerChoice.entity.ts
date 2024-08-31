@@ -1,4 +1,4 @@
-import { AnswerDetail } from 'src/answer-detail/entities/answerDetail.entity';
+import { AnswerDetail } from '../../answer-detail/entities/answerDetail.entity';
 import { Question } from '../../question/entities/question.entity';
 import {
   Column,

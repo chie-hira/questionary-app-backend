@@ -1,6 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { AnswerChoiceModel } from 'src/answer-choice/models/answerChoice.model';
-import { AnswerResultModel } from 'src/answer-result/models/answerResult.model';
+import { AnswerChoiceModel } from '../../answer-choice/models/answerChoice.model';
+import { AnswerResultModel } from '../../answer-result/models/answerResult.model';
 
 @ObjectType()
 export class AnswerDetailModel {

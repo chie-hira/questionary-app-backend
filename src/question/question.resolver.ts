@@ -4,7 +4,7 @@ import { QuestionModel } from './models/question.model';
 import { CreateQuestionInput } from './dto/createQuestion.input.dto';
 import { CreateAnswerChoiceInput } from '../answer-choice/dto/createAnswerChoice.input.dto';
 import { UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Resolver()
 export class QuestionResolver {

@@ -1,4 +1,4 @@
-import { AnswerResult } from 'src/answer-result/entities/answerResult.entity';
+import { AnswerResult } from '../../answer-result/entities/answerResult.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('respondents')

@@ -6,7 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateQuestionInput } from './dto/createQuestion.input.dto';
 import { AnswerChoice } from '../answer-choice/entities/answerChoice.entity';
 import { CreateAnswerChoiceInput } from '../answer-choice/dto/createAnswerChoice.input.dto';
-import { User } from 'src/user/entities/user.entity';
+import { User } from '../user/entities/user.entity';
 
 @Injectable()
 export class QuestionService {
@@ -19,7 +19,9 @@ export class QuestionService {
   ) {}
 
   async getAllQuestions(): Promise<QuestionModel[]> {
-    return await this.questionRepository.find();
+    return await this.questionRepository.find({
+      relations: ['user', 'answerChoices'],
+    });
   }
 
   async getQuestionsByUser(userId: number): Promise<QuestionModel[]> {
