@@ -4,12 +4,15 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AnswerDetailModel } from './models/answerDetail.model';
 import { AggregatedAnswerModel } from './models/aggregatedAnswer.model';
+import { AnswerChoice } from 'src/answer-choice/entities/answerChoice.entity';
 
 @Injectable()
 export class AnswerDetailService {
   constructor(
     @InjectRepository(AnswerDetail)
     private readonly answerDetailRepository: Repository<AnswerDetail>,
+    @InjectRepository(AnswerChoice)
+    private readonly answerChoiceRepository: Repository<AnswerChoice>,
   ) {}
 
   async getAggregatedAnswerByQuestionId(
@@ -19,31 +22,39 @@ export class AnswerDetailService {
       relations: ['answerResult', 'answerResult.question', 'answerChoice'],
       where: { answerResult: { question: { id: questionId } } },
     });
+    const answerChoices = await this.answerChoiceRepository.find({
+      relations: ['question'],
+      where: { question: { id: questionId } },
+    });
 
-    const aggregatedAnswer = this.aggregateAnswerDetails(answerDetails);
+    const aggregatedAnswer = this.aggregateAnswerDetails(
+      answerDetails,
+      answerChoices,
+    );
 
     return aggregatedAnswer;
   }
 
   private aggregateAnswerDetails(
     answerDetails: AnswerDetailModel[],
+    answerChoices: AnswerChoice[],
   ): AggregatedAnswerModel[] {
-    const aggregatedAnswerList: AggregatedAnswerModel[] = [];
+    const aggregatedAnswerList: AggregatedAnswerModel[] = answerChoices.map(
+      (answerChoice) => ({
+        questionId: answerChoice.question.id,
+        question: answerChoice.question.question,
+        choiceId: answerChoice.id,
+        choice: answerChoice.answerChoice,
+        count: 0,
+      }),
+    );
+
     for (const answerDetail of answerDetails) {
-      let aggregatedAnswer = aggregatedAnswerList.find(
+      const aggregatedAnswer = aggregatedAnswerList.find(
         (a) => a.choiceId === answerDetail.answerChoice.id,
       );
 
-      if (!aggregatedAnswer) {
-        aggregatedAnswer = {
-          questionId: answerDetail.answerResult.question.id,
-          question: answerDetail.answerResult.question.question,
-          choiceId: answerDetail.answerChoice.id,
-          choice: answerDetail.answerChoice.answerChoice,
-          count: 1,
-        };
-        aggregatedAnswerList.push(aggregatedAnswer);
-      } else {
+      if (aggregatedAnswer) {
         aggregatedAnswer.count += 1;
       }
     }
